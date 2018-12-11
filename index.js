@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const inquirer = require('inquirer')
-const generateCSPRN = require('./src/generateCSPRN')
+const { generateAndDisplayCSPRN } = require('./src/generateCSPRN')
 const quit = require('./src/quit')
 
 
@@ -25,7 +25,7 @@ async function execute() {
 
     switch (action) {
       case 'generateCSPRN':
-        await generateCSPRN()
+        await generateAndDisplayCSPRN()
         break
 
       case 'quit':

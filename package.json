@@ -16,6 +16,7 @@
   "dependencies": {
     "bn-str-256": "^1.9.1",
     "csprng": "^0.1.2",
-    "inquirer": "^6.2.1"
+    "inquirer": "^6.2.1",
+    "keccak": "^1.4.0"
   }
 }
