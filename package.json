@@ -12,5 +12,10 @@
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^1.18.8"
+  },
+  "dependencies": {
+    "bn-str-256": "^1.9.1",
+    "csprng": "^0.1.2",
+    "inquirer": "^6.2.1"
   }
 }
