@@ -23,6 +23,11 @@ async function execute() {
       name: 'Derive Public Key from Private Key',
       short: 'Derive Public Key',
       value: 'derivePublicKey'
+    },
+    {
+      name: 'Quit',
+      short: 'Quit',
+      value: 'quit'
     }
   ]
 
