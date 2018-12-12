@@ -15,8 +15,10 @@
   },
   "dependencies": {
     "bn-str-256": "^1.9.1",
+    "crypto": "^1.0.1",
     "csprng": "^0.1.2",
     "inquirer": "^6.2.1",
-    "keccak": "^1.4.0"
+    "keccak": "^1.4.0",
+    "secp256k1": "^3.5.2"
   }
 }

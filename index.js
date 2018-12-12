@@ -3,6 +3,7 @@
 const inquirer = require('inquirer')
 const { generateAndDisplayCSPRN } = require('./src/generateCSPRN')
 const { generateAndDisplayPrivateKey } = require('./src/generatePrivateKey')
+const { deriveAndDisplayPublicKey } = require('./src/derivePublicKey')
 const quit = require('./src/quit')
 
 
@@ -17,6 +18,11 @@ async function execute() {
       name: 'Generate Private Key',
       short: 'Generate Private Key',
       value: 'generatePrivateKey'
+    },
+    {
+      name: 'Derive Public Key from Private Key',
+      short: 'Derive Public Key',
+      value: 'derivePublicKey'
     }
   ]
 
@@ -38,6 +44,10 @@ async function execute() {
         generateAndDisplayPrivateKey()
         break
 
+      case 'derivePublicKey':
+        await deriveAndDisplayPublicKey()
+        break
+        
       case 'quit':
         quit()
         break
