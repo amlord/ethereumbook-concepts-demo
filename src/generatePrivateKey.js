@@ -1,7 +1,7 @@
 // cryptographically secure pseudo-random number generator
 const { generateCSPRN } = require('./generateCSPRN')
 
-// handle big numbers in js (up to 256 bit)
+// keccak secure hashing function
 const createKeccakHash = require('keccak')
 
 function generatePrivateKey() {
@@ -16,7 +16,7 @@ function generateAndDisplayPrivateKey() {
   const privateKey = generatePrivateKey()
 
   console.log('\n')
-  console.log(`> Generated Private Key (hexadecimal):\n\n0x${privateKey}`)
+  console.log(`> Generated Private Key (hexadecimal):\n\n${privateKey}`)
 }
 
 module.exports = {

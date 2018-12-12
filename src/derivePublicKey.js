@@ -31,8 +31,8 @@ async function deriveAndDisplayPublicKey() {
     const publicKey = derivePublicKey(privateKeyBuffer)
 
     console.log('\n')
-    console.log(`> Private Key (hexadecimal):\n\n0x${privateKey.toString('hex')}\n\n`)
-    console.log(`> Derived Public Key (hexadecimal):\n\n0x${publicKey}`)
+    console.log(`> Private Key (hexadecimal):\n\n${privateKey.toString('hex')}\n\n`)
+    console.log(`> Derived Public Key (hexadecimal):\n\n${publicKey}`)
   } catch (error) {
     console.log('\n')
     console.log(`> ${error.message}`)
