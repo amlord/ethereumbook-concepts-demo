@@ -42,7 +42,7 @@ async function deriveAndDisplayEthereumAddress() {
   } ])
 
   let privateKey = generatePrivateKey()
-  let publicKey = derivePublicKey(new Buffer(privateKey, "hex"))
+  let publicKey = derivePublicKey(new Buffer(privateKey, "hex"), false)
 
   if(keyType === 'private') {
     // prompt use to enter private key (or use default generated)
@@ -54,7 +54,7 @@ async function deriveAndDisplayEthereumAddress() {
     }])
 
     privateKey = response.privateKey
-    publicKey = derivePublicKey(new Buffer(privateKey, "hex"))
+    publicKey = derivePublicKey(new Buffer(privateKey, "hex"), false)
   } else {
     // prompt use to enter private key (or use default generated)
     const response = await inquirer.prompt([{
@@ -74,7 +74,7 @@ async function deriveAndDisplayEthereumAddress() {
   console.log(`> Private Key (hexadecimal):\n\n${privateKey ? privateKey : "(UNKNOWN)"}`)
 
   console.log('\n')
-  console.log(`> ${privateKey ? "Derived " : ""}Public Key (hexadecimal):\n\n${publicKey}`)
+  console.log(`> ${privateKey ? "Derived " : ""}Public Key (hexadecimal, uncompressed):\n\n${publicKey}`)
 
   console.log('\n')
   console.log(`> Derived Ethereum Address (hexadecimal):\n\n${ethereumAddress}`)

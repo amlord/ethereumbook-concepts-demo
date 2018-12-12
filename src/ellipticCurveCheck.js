@@ -1,6 +1,6 @@
 const inquirer = require('inquirer')
 
-// handle big numbers in js (up to 256 bit)
+// handle big numbers in js
 const BigNumber = require('bignumber.js')
 
 async function ellipticCurveCheck() {
