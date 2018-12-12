@@ -5,6 +5,7 @@ const { generateAndDisplayCSPRN } = require('./src/generateCSPRN')
 const { generateAndDisplayPrivateKey } = require('./src/generatePrivateKey')
 const { deriveAndDisplayPublicKey } = require('./src/derivePublicKey')
 const { deriveAndDisplayEthereumAddress } = require('./src/deriveEthereumAddress')
+const { ellipticCurveCheck } = require('./src/ellipticCurveCheck')
 const quit = require('./src/quit')
 
 
@@ -29,6 +30,11 @@ async function execute() {
       name: 'Derive Ethereum Address',
       short: 'Derive Ethereum Address',
       value: 'deriveEthereumAddress'
+    },
+    {
+      name: 'Elliptic Curve Check',
+      short: 'Elliptic Curve Check',
+      value: 'ellipticCurveCheck'
     },
     {
       name: 'Quit',
@@ -61,6 +67,10 @@ async function execute() {
 
       case 'deriveEthereumAddress':
         await deriveAndDisplayEthereumAddress()
+        break
+
+      case 'ellipticCurveCheck':
+        await ellipticCurveCheck()
         break
         
       case 'quit':

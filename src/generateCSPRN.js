@@ -1,16 +1,16 @@
 // cryptographically secure pseudo-random number generator
 const csprng = require('csprng')
 
-// handle big numbers in js (up to 256 bit)
-const bigNumber = require('bn-str-256')
+// handle big numbers in js
+const BigNumber = require('bignumber.js')
 
 function generateCSPRN(bits = 256) {
   // generate the random number in hex
   const base16Result = csprng(bits, 16)
 
   // convert hex number to decimal & binary
-  const base10Result = bigNumber.parse(`0x${base16Result}`)
-  const base2Result = bigNumber.toBinary(`0x${base16Result}`).substring(2)
+  const base10Result = BigNumber(`0x${base16Result}`).toString(10)
+  const base2Result = BigNumber(`0x${base16Result}`).toString(2)
 
   return {
     base16: base16Result,
