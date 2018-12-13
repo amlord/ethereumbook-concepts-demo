@@ -28,14 +28,14 @@ async function execute() {
       value: 'derivePublicKey'
     },
     {
-      name: 'Derive Ethereum Address',
-      short: 'Derive Ethereum Address',
-      value: 'deriveEthereumAddress'
-    },
-    {
       name: 'Elliptic Curve Check',
       short: 'Elliptic Curve Check',
       value: 'ellipticCurveCheck'
+    },
+    {
+      name: 'Derive Ethereum Address',
+      short: 'Derive Ethereum Address',
+      value: 'deriveEthereumAddress'
     },
     {
       name: 'EIP-55 Checksum',
