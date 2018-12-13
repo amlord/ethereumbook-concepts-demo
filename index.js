@@ -6,6 +6,7 @@ const { generateAndDisplayPrivateKey } = require('./src/generatePrivateKey')
 const { deriveAndDisplayPublicKey } = require('./src/derivePublicKey')
 const { deriveAndDisplayEthereumAddress } = require('./src/deriveEthereumAddress')
 const { ellipticCurveCheck } = require('./src/ellipticCurveCheck')
+const { eip55Checksum } = require('./src/eip55Checksum')
 const quit = require('./src/quit')
 
 
@@ -35,6 +36,11 @@ async function execute() {
       name: 'Elliptic Curve Check',
       short: 'Elliptic Curve Check',
       value: 'ellipticCurveCheck'
+    },
+    {
+      name: 'EIP-55 Checksum',
+      short: 'EIP-55 Checksum',
+      value: 'eip55Checksum'
     },
     {
       name: 'Quit',
@@ -71,6 +77,10 @@ async function execute() {
 
       case 'ellipticCurveCheck':
         await ellipticCurveCheck()
+        break
+
+      case 'eip55Checksum':
+        await eip55Checksum()
         break
         
       case 'quit':

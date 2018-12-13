@@ -3,9 +3,6 @@ const inquirer = require('inquirer')
 const { derivePublicKey } = require('./derivePublicKey')
 const { generatePrivateKey } = require('./generatePrivateKey')
 
-// check private key & devive public key
-const secp256k1 = require('secp256k1')
-
 // keccak secure hashing function
 const createKeccakHash = require('keccak')
 
