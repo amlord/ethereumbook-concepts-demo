@@ -68,6 +68,9 @@ async function deriveAndDisplayEthereumAddress() {
     publicKey = response.publicKey
   }
 
+  // remove the prefix (should always be '04' for an uncompressed publicKey)
+  publicKey = publicKey.substring(2)
+
   const ethereumAddress = deriveEthereumAddress(publicKey)
 
   console.log('\n')
