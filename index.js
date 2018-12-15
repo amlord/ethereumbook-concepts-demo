@@ -7,6 +7,7 @@ const { deriveAndDisplayPublicKey } = require('./src/derivePublicKey')
 const { deriveAndDisplayEthereumAddress } = require('./src/deriveEthereumAddress')
 const { ellipticCurveCheck } = require('./src/ellipticCurveCheck')
 const { eip55Checksum } = require('./src/eip55Checksum')
+const { generateAndDisplayMnemonic } = require('./src/generateMnemonic')
 const quit = require('./src/quit')
 
 
@@ -38,9 +39,14 @@ async function execute() {
       value: 'deriveEthereumAddress'
     },
     {
-      name: 'EIP-55 Checksum',
+      name: 'Ethereum Address Checksum (EIP-55)',
       short: 'EIP-55 Checksum',
       value: 'eip55Checksum'
+    },
+    {
+      name: 'Generate Mnemonic (BIP-39)',
+      short: 'Generate Mnemonic',
+      value: 'generateMnemonic'
     },
     {
       name: 'Quit',
@@ -81,6 +87,10 @@ async function execute() {
 
       case 'eip55Checksum':
         await eip55Checksum()
+        break
+
+      case 'generateMnemonic':
+        await generateAndDisplayMnemonic()
         break
         
       case 'quit':
