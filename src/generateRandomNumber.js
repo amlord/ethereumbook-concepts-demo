@@ -1,3 +1,5 @@
+const style = require('./helpers/textStyle')
+
 // nodejs crypto module
 const { randomBytes } = require('crypto')
 
@@ -23,9 +25,9 @@ function generateAndDisplayRandomNumber() {
   const randomNumber = generateRandomNumber()
 
   console.log('\n')
-  console.log(`> hexadecimal (base16):\n\n${randomNumber.base16}\n\n`)
-  console.log(`> decimal (base10):\n\n${randomNumber.base10}\n\n`)
-  console.log(`> binary (base2):\n\n${randomNumber.base2}`)
+  console.log(`> hexadecimal: ${style.note("(base16)")}\n\n${style.primary(randomNumber.base16)}\n\n`)
+  console.log(`> decimal: ${style.note("(base10)")}\n\n${style.primary(randomNumber.base10)}\n\n`)
+  console.log(`> binary: ${style.note("(base2)")}\n\n${style.primary(randomNumber.base2)}`)
 }
 
 module.exports = {
