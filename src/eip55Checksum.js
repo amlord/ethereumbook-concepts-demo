@@ -1,3 +1,4 @@
+const style = require('./helpers/textStyle')
 const inquirer = require('inquirer')
 
 // derive ethereum address from public key
@@ -40,9 +41,9 @@ async function createChecksum() {
   const checksum = await createChecksumFromAddress(address)
 
   console.log('\n')
-  console.log(`> Ethereum Address:\n\n${address}\n\n`)
-  console.log(`> Address Hash:\n\n${addressHash}\n\n`)
-  console.log(`> Checksum Address:\n\n${checksum}`)
+  console.log(`> Ethereum Address:\n\n${style.secondary(address)}\n\n`)
+  console.log(`> Address Hash:\n\n${style.secondary(addressHash)}\n\n`)
+  console.log(`> Checksum Address:\n\n${style.primary(checksum)}`)
 }
 
 async function validateAddress() {
@@ -56,9 +57,9 @@ async function validateAddress() {
   const checksum = await createChecksumFromAddress(address)
 
   console.log('\n')
-  console.log(`> Input Checksum Address:\n\n${address}\n\n`)
-  console.log(`> Actual Checksum Address:\n\n${checksum}\n\n`)
-  console.log(`> Result:\n\n${address === checksum ? "***** MATCHING CHECKSUM *****" : "!!!!! INVALID CHECKSUM !!!!!"}`)
+  console.log(`> Input Checksum Address:\n\n${style.secondary(address)}\n\n`)
+  console.log(`> Actual Checksum Address:\n\n${style.secondary(checksum)}\n\n`)
+  console.log(`> Result:\n\n${address === checksum ? style.primary("***** MATCHING CHECKSUM *****") : style.error("!!!!! INVALID CHECKSUM !!!!!")}`)
 }
 
 async function eip55Checksum() {

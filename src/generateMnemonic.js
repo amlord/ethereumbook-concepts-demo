@@ -126,7 +126,19 @@ async function generateAndDisplayMnemonic() {
   console.log(style.header('> Cryptographically-Secure Random Number: ') + style.note(`(${mnemonic.entropyBits} bits of entropy / ${mnemonic.checksumBits} checksum bits, chcksum: ${mnemonic.checksum})\n`))
   console.log(style.secondary(`${mnemonic.randomNumber}\n\n`))
   console.log(style.header('> Mnemonic: ') + style.note(`(${mnemonicLength} words / ${mnemonic.entropyBits} bits of entropy / ${mnemonic.checksumBits} checksum bits)\n`))
-  console.log(`${style.primary(mnemonic.sentence)}`)
+  console.log(`${style.primary(mnemonic.sentence)}\n\n`)
+
+  // prompt use to enter derived wallet passphrase
+  const { passphrase } = await inquirer.prompt([{
+    type: 'input',
+    name: 'passphrase',
+    message: 'Derived Wallet Passphrase (optional)',
+    default: ''
+  }])
+
+
+  const seed = pbkdf2Sync(mnemonic.sentence, `mnemonic${passphrase}`, 2048, 512, 'sha512')
+  console.log(seed.toString('hex'))
 }
 
 module.exports = {

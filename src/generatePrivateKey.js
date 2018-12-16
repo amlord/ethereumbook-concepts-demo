@@ -1,3 +1,5 @@
+const style = require('./helpers/textStyle')
+
 // cryptographically secure pseudo-random number generator
 const { generateRandomNumber } = require('./generateRandomNumber')
 
@@ -16,7 +18,7 @@ function generateAndDisplayPrivateKey() {
   const privateKey = generatePrivateKey()
 
   console.log('\n')
-  console.log(`> Generated Private Key (hexadecimal):\n\n${privateKey}`)
+  console.log(`> Generated Private Key: ${style.note("(hexadecimal)")}\n\n${style.primary(privateKey)}`)
 }
 
 module.exports = {

@@ -1,3 +1,4 @@
+const style = require('./helpers/textStyle')
 const inquirer = require('inquirer')
 
 const { derivePublicKey } = require('./derivePublicKey')
@@ -71,13 +72,13 @@ async function deriveAndDisplayEthereumAddress() {
   const ethereumAddress = deriveEthereumAddress(publicKeyWithoutPrefix)
 
   console.log('\n')
-  console.log(`> Private Key (hexadecimal):\n\n${privateKey ? privateKey : "(UNKNOWN)"}`)
+  console.log(`> Private Key:\n\n${privateKey ? style.secondary(privateKey) : style.note("(UNKNOWN)")}`)
 
   console.log('\n')
-  console.log(`> ${privateKey ? "Derived " : ""}Public Key (hexadecimal, uncompressed):\n\n${publicKey}`)
+  console.log(`> ${privateKey ? "Derived " : ""}Public Key: ${style.note("(uncompressed)")}\n\n${style.secondary(publicKey)}`)
 
   console.log('\n')
-  console.log(`> Derived Ethereum Address (hexadecimal):\n\n${ethereumAddress}`)
+  console.log(`> Derived Ethereum Address:\n\n${style.primary(ethereumAddress)}`)
 }
 
 module.exports = {

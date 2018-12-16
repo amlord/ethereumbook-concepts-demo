@@ -1,3 +1,4 @@
+const style = require('./helpers/textStyle')
 const inquirer = require('inquirer')
 
 // handle big numbers in js
@@ -31,10 +32,10 @@ async function ellipticCurveCheck() {
   const result = xCoord.exponentiatedBy(3).plus(7).minus(yCoord.exponentiatedBy(2)).modulo(primeOrder).toString(10)
 
   console.log('\n')
-  console.log(`> Prime Order of the secp256k1 curve:\n\n${primeOrder.toString(10)}\n\n`)
-  console.log(`> X-axis co-ordinate:\n\n${xCoord.toString(10)}\n\n`)
-  console.log(`> Y-axis co-ordinate:\n\n${yCoord.toString(10)}\n\n`)
-  console.log(`> Outcome:\n\n${result === "0" ? "***** CO-ORDINATES ON CURVE *****" : "!!!!! INVALID CO-ORDINATES !!!!!"}`)
+  console.log(`> Prime Order of the secp256k1 curve:\n\n${style.secondary(primeOrder.toString(10))}\n\n`)
+  console.log(`> X-axis co-ordinate:\n\n${style.secondary(xCoord.toString(10))}\n\n`)
+  console.log(`> Y-axis co-ordinate:\n\n${style.secondary(yCoord.toString(10))}\n\n`)
+  console.log(`> Outcome:\n\n${result === "0" ? style.primary("***** CO-ORDINATES ON CURVE *****") : style.error("!!!!! INVALID CO-ORDINATES !!!!!")}`)
 }
 
 module.exports = {
