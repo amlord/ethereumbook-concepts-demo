@@ -1,11 +1,8 @@
 const inquirer = require('inquirer')
-const style = require('./helpers/textStyle');
+const style = require('./helpers/textStyle')
 
-// generate cryptographically-secure random number
-const { generateCSPRN } = require('./generateCSPRN.js')
-
-// keccak secure hashing function
-const createKeccakHash = require('keccak')
+// nodejs crypto module
+const { createHash, randomBytes, pbkdf2Sync } = require('crypto')
 
 // handle big numbers in js
 const BigNumber = require('bignumber.js')
@@ -53,25 +50,33 @@ const mnemonicMap = {
  * @returns {MnemonicDetails} - Returns an object containing the mnemonic, seed & checksum
  */
 function generateMnemonic(numberOfWords = 12) {
-  // generate a random number (base2), length determined by the entropy required
-  const { base2: randomNumber } = generateCSPRN(mnemonicMap[numberOfWords].entropyBits)
+  // generate a random number, length determined by the entropy required
+  const randomNumber = randomBytes(mnemonicMap[numberOfWords].entropyBits / 8)
 
-  // hash the random numbber
-  const randomNumberHash = createKeccakHash('keccak256').update(randomNumber).digest('hex')
-  const binaryRandomNumberHash = BigNumber(`0x${randomNumberHash}`).toString(2)
+  // hash random number
+  const randomNumberHash = createHash('sha256').update(randomNumber).digest()
 
-  // convert has to binary & take the leftmost number of checksum required bits
+  // convert to binary (maintaining 256 bits length)
+  const binaryRandomNumberHash = BigNumber(`0x${randomNumberHash.toString('hex')}`).toString(2).padStart(256, '0')
+
+  // take the leftmost number of checksum required bits
   const checksum = binaryRandomNumberHash.substring(0, mnemonicMap[numberOfWords].checksumBits)
 
+  // convert random numbber to binary (maintaining required entropy bits)
+  const binaryRandomNumber = BigNumber(`0x${randomNumber.toString('hex')}`).toString(2).padStart(mnemonicMap[numberOfWords].entropyBits, '0')
+
+  // concat binary checksum to binary random number 
+  const rawBinaryMnemonic = binaryRandomNumber.concat(checksum)
+
   // get binary keys array for mnemonic words required (split into blocks of 11 bits)
-  const mnemonicWordKeys = (randomNumber + checksum).match(/.{1,11}/g)
+  const mnemonicWordKeys = rawBinaryMnemonic.match(/.{1,11}/g)
 
   // map keys to the mnemonic words
   const mnemonic = mnemonicWordKeys.map(key => wordlist[key])
 
   return {
     entropyBits: mnemonicMap[numberOfWords].entropyBits,
-    randomNumber,
+    randomNumber: randomNumber.toString('hex'),
     checksumBits: mnemonicMap[numberOfWords].checksumBits,
     checksum,
     words: mnemonic,
