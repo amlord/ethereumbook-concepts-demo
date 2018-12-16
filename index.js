@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const inquirer = require('inquirer')
-const { generateAndDisplayCSPRN } = require('./src/generateCSPRN')
+const { generateAndDisplayRandomNumber } = require('./src/generateRandomNumber')
 const { generateAndDisplayPrivateKey } = require('./src/generatePrivateKey')
 const { deriveAndDisplayPublicKey } = require('./src/derivePublicKey')
 const { deriveAndDisplayEthereumAddress } = require('./src/deriveEthereumAddress')
@@ -16,7 +16,7 @@ async function execute() {
     {
       name: 'Generate CSPRN (cryptographically secure pseudo-random number)',
       short: 'Generate CSPRN',
-      value: 'generateCSPRN'
+      value: 'generateRandomNumber'
     },
     {
       name: 'Generate Private Key',
@@ -65,8 +65,8 @@ async function execute() {
     } ])
 
     switch (action) {
-      case 'generateCSPRN':
-        generateAndDisplayCSPRN()
+      case 'generateRandomNumber':
+        generateAndDisplayRandomNumber()
         break
 
       case 'generatePrivateKey':
