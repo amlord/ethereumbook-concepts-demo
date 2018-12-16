@@ -10,9 +10,7 @@
   "repository": "https://github.com/amlord/ethereumbook-concepts-demo.git",
   "author": "Andrew Lord <me@andrewlord.uk>",
   "license": "MIT",
-  "devDependencies": {
-    "nodemon": "^1.18.8"
-  },
+  "devDependencies": {},
   "dependencies": {
     "bignumber.js": "^8.0.1",
     "chalk": "^2.4.1",
