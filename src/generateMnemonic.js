@@ -1,4 +1,5 @@
 const inquirer = require('inquirer')
+const style = require('./helpers/textStyle');
 
 // generate cryptographically-secure random number
 const { generateCSPRN } = require('./generateCSPRN.js')
@@ -70,7 +71,7 @@ function generateMnemonic(numberOfWords = 12) {
 
   return {
     entropyBits: mnemonicMap[numberOfWords].entropyBits,
-    seed: randomNumber,
+    randomNumber,
     checksumBits: mnemonicMap[numberOfWords].checksumBits,
     checksum,
     words: mnemonic,
@@ -117,9 +118,10 @@ async function generateAndDisplayMnemonic() {
   const mnemonic = generateMnemonic(mnemonicLength)
 
   console.log('\n')
-  console.log(`> Mnemonic (${mnemonicLength} words / ${mnemonic.entropyBits} bits of entropy / ${mnemonic.checksumBits} checksum bits):\n\n`)
-  console.log(`${mnemonic.sentence}\n\n`)
-  console.log(`> Deterministic Wallet Seed (chcksum: ${mnemonic.checksum}):\n\n${mnemonic.seed}`)
+  console.log(style.header('> Cryptographically-Secure Random Number: ') + style.note(`(${mnemonic.entropyBits} bits of entropy / ${mnemonic.checksumBits} checksum bits, chcksum: ${mnemonic.checksum})\n`))
+  console.log(style.secondary(`${mnemonic.randomNumber}\n\n`))
+  console.log(style.header('> Mnemonic: ') + style.note(`(${mnemonicLength} words / ${mnemonic.entropyBits} bits of entropy / ${mnemonic.checksumBits} checksum bits)\n`))
+  console.log(`${style.primary(mnemonic.sentence)}`)
 }
 
 module.exports = {
