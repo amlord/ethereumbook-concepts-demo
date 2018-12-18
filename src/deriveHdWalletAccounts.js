@@ -28,22 +28,24 @@ const HDKey = require('hdkey')
  */
 function deriveHdWalletAccounts(seed, account = 0, child = 0, results = 1) {
   const hdkey = HDKey.fromMasterSeed(Buffer.from(seed, 'hex'))
-
-  const change = '0' // always '0' for ethereum, as not used
   const accounts = []
 
-  // path definition (where 44 = BIP-44, and 60 = ETH)
-  const path = `m/44'/60'/${account}'/${change}/`
+  const purpose = '44' // BIP-44 (https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
+  const coinType = '60' // ETH
+  const change = '0' // always '0' for ethereum, as not used
 
   for(let i = parseInt(child); i < (parseInt(child) + parseInt(results)); i++) {
+    // HD wallet path to account being derived
+    const path = `m/${purpose}'/${coinType}'/${account}'/${change}/${i}`
+
     // derive public & private keys for specified path
-    const childkey = hdkey.derive(path + i)
+    const childkey = hdkey.derive(path)
 
     // get 'uncompressed' public key & remove first byte 'prefix'
     const uncompressedPublicKeyBuffer = secp256k1.publicKeyConvert(childkey.publicKey, false).slice(1)
 
     accounts.push({
-      path: path + i,
+      path: path,
       address: deriveEthereumAddress(uncompressedPublicKeyBuffer),
       privateKey: childkey.privateKey.toString('hex'),
       publicKey: childkey.publicKey.toString('hex')
