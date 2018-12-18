@@ -18,7 +18,7 @@ function generateAndDisplayPrivateKey() {
   const privateKey = generatePrivateKey()
 
   console.log('\n')
-  console.log(`> Generated Private Key: ${style.note("(hexadecimal)")}\n\n${style.primary(privateKey)}`)
+  console.log(`${style.header("> Generated Private Key: ")}${style.note("(hexadecimal)")}\n\n${style.primary(privateKey)}`)
 }
 
 module.exports = {

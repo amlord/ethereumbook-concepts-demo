@@ -137,8 +137,10 @@ async function generateAndDisplayMnemonic() {
   }])
 
 
-  const seed = pbkdf2Sync(mnemonic.sentence, `mnemonic${passphrase}`, 2048, 512, 'sha512')
-  console.log(seed.toString('hex'))
+  const seed = pbkdf2Sync(mnemonic.sentence, `mnemonic${passphrase}`, 2048, (512 / 8), 'sha512')
+
+  console.log('\n')
+  console.log(style.header('> Deterministic Wallet Seed:\n\n') + style.primary(seed.toString('hex')))
 }
 
 module.exports = {
