@@ -51,7 +51,7 @@ async function execute() {
       value: 'generateMnemonic'
     },
     {
-      name: 'Derive Hierachical Deterministic (HD) Wallet Accounts (BIP-44)',
+      name: 'Derive Hierarchical Deterministic (HD) Wallet Accounts (BIP-44)',
       short: 'HD Wallet Accounts',
       value: 'deriveHdWalletAccounts'
     },

@@ -33,4 +33,4 @@ yarn run start
 1. Derive Ethereum Address
 1. Ethereum Address Checksum (EIP-55)
 1. Generate Mnemonic (BIP-39)
-1. Derive Hieracical Deterministic (HD) Wallet Accounts (BIP-44)
+1. Derive Hierarchical Deterministic (HD) Wallet Accounts (BIP-44)

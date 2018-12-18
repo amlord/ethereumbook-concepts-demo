@@ -5,7 +5,7 @@ const { deriveEthereumAddress } = require('./deriveEthereumAddress')
 // eliptic curve package for Ethereum (& Bitcoin)
 const secp256k1 = require('secp256k1')
 
-// Hierachical Deterministic (HD) Wallet
+// Hierarchical Deterministic (HD) Wallet
 const HDKey = require('hdkey')
 
 /**
@@ -17,7 +17,7 @@ const HDKey = require('hdkey')
  */
 
 /**
- * Derive Hierachical Deterministic (HD) Wallet for a specific path
+ * Derive Hierarchical Deterministic (HD) Wallet for a specific path
  * 
  * @property {String} seed - deterministic wallet seed
  * @property {Number|String} [account = 0] - account ID (integer), or string to go further down the tree (i.e. "0'/0" to go 1 level deeper)
@@ -33,7 +33,7 @@ function deriveHdWalletAccounts(seed, account = 0, child = 0, results = 1) {
   const purpose = '44' // BIP-44 (https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
   const coinType = '60' // ETH
   const change = '0' // always '0' for ethereum, as not used
-
+gp
   for(let i = parseInt(child); i < (parseInt(child) + parseInt(results)); i++) {
     // HD wallet path to account being derived
     const path = `m/${purpose}'/${coinType}'/${account}'/${change}/${i}`
