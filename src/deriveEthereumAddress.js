@@ -61,7 +61,7 @@ async function deriveAndDisplayEthereumAddress() {
     privateKey = response.privateKey
     publicKey = derivePublicKey(Buffer.from(privateKey, "hex"), false)
   } else {
-    // prompt use to enter uncompressed publbic key (or use default generated)
+    // prompt use to enter uncompressed public key (or use default generated)
     const response = await inquirer.prompt([{
       type: 'input',
       name: 'publicKey',
