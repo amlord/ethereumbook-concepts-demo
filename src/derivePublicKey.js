@@ -29,7 +29,7 @@ async function deriveAndDisplayPublicKey() {
   }])
   
   // get hex private key & convert to buffer
-  const privateKeyBuffer = new Buffer(privateKey, "hex")
+  const privateKeyBuffer = Buffer.from(privateKey, "hex")
 
   try {
     const publicKeyCompressed = derivePublicKey(privateKeyBuffer, true)

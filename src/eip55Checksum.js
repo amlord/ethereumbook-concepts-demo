@@ -26,7 +26,7 @@ async function createChecksumFromAddress(address) {
 
 async function createChecksum() {
   const privateKey = generatePrivateKey()
-  const publicKey = derivePublicKey(new Buffer(privateKey, "hex"), false)
+  const publicKey = derivePublicKey(Buffer.from(privateKey, "hex"), false)
   const defaultAddress = deriveEthereumAddress(publicKey.substring(2))
 
   // prompt use to enter Ethereum Address

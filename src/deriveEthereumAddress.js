@@ -7,6 +7,13 @@ const { generatePrivateKey } = require('./generatePrivateKey')
 // keccak secure hashing function
 const createKeccakHash = require('keccak')
 
+/**
+ * Derive Ethereum address from uncompressed Public Key
+ * 
+ * @property {Buffer} publicKey - buffer containing the uncompressed public key (minus the prefix)
+ * 
+ * @returns {String} - Returns a string containing the ethereum address
+ */
 function deriveEthereumAddress(publicKey) {
   // take Keccak-256 hash of public key
   const publicKeyHash = createKeccakHash('keccak256').update(publicKey).digest('hex')
@@ -40,7 +47,7 @@ async function deriveAndDisplayEthereumAddress() {
   } ])
 
   let privateKey = generatePrivateKey()
-  let publicKey = derivePublicKey(new Buffer(privateKey, "hex"), false)
+  let publicKey = derivePublicKey(Buffer.from(privateKey, "hex"), false)
 
   if(keyType === 'private') {
     // prompt use to enter private key (or use default generated)
@@ -52,9 +59,9 @@ async function deriveAndDisplayEthereumAddress() {
     }])
 
     privateKey = response.privateKey
-    publicKey = derivePublicKey(new Buffer(privateKey, "hex"), false)
+    publicKey = derivePublicKey(Buffer.from(privateKey, "hex"), false)
   } else {
-    // prompt use to enter private key (or use default generated)
+    // prompt use to enter uncompressed publbic key (or use default generated)
     const response = await inquirer.prompt([{
       type: 'input',
       name: 'publicKey',

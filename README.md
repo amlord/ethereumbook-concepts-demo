@@ -2,6 +2,19 @@
 A CLI for demonstration of concepts in the "Mastering Ethereum" book by Andreas M. Antonopoulos
 
 
+## Node Version 
+This CLI uses node **v11.4**, some functionality _may not work_ with lower versions.
+
+If you're using [NVM](https://github.com/creationix/nvm), simply run:
+```javascript
+nvm use
+```
+Otherwise, check which version you're using:
+```javascript
+node -v
+```
+...and upgrade if necessary.
+
 ## Install
 ```javascript
 yarn install
