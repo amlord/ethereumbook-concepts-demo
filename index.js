@@ -8,6 +8,8 @@ const { deriveAndDisplayEthereumAddress } = require('./src/deriveEthereumAddress
 const { ellipticCurveCheck } = require('./src/ellipticCurveCheck')
 const { eip55Checksum } = require('./src/eip55Checksum')
 const { generateAndDisplayMnemonic } = require('./src/generateMnemonic')
+const { deriveAndDisplayHdWalletAccounts } = require('./src/deriveHdWalletAccounts')
+
 const quit = require('./src/quit')
 
 
@@ -47,6 +49,11 @@ async function execute() {
       name: 'Generate Mnemonic (BIP-39)',
       short: 'Generate Mnemonic',
       value: 'generateMnemonic'
+    },
+    {
+      name: 'Derive Hierachical Deterministic (HD) Wallet Accounts (BIP-44)',
+      short: 'HD Wallet Accounts',
+      value: 'deriveHdWalletAccounts'
     },
     {
       name: 'Quit',
@@ -91,6 +98,10 @@ async function execute() {
 
       case 'generateMnemonic':
         await generateAndDisplayMnemonic()
+        break
+
+      case 'deriveHdWalletAccounts':
+        await deriveAndDisplayHdWalletAccounts()
         break
         
       case 'quit':
