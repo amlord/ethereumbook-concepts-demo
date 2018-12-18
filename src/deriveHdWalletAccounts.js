@@ -1,6 +1,7 @@
 const inquirer = require('inquirer')
 const style = require('./helpers/textStyle')
 const { deriveEthereumAddress } = require('./deriveEthereumAddress')
+const { createChecksumFromAddress } = require('./eip55Checksum')
 
 // eliptic curve package for Ethereum (& Bitcoin)
 const secp256k1 = require('secp256k1')
@@ -33,7 +34,7 @@ function deriveHdWalletAccounts(seed, account = 0, child = 0, results = 1) {
   const purpose = '44' // BIP-44 (https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
   const coinType = '60' // ETH
   const change = '0' // always '0' for ethereum, as not used
-gp
+
   for(let i = parseInt(child); i < (parseInt(child) + parseInt(results)); i++) {
     // HD wallet path to account being derived
     const path = `m/${purpose}'/${coinType}'/${account}'/${change}/${i}`
@@ -43,10 +44,13 @@ gp
 
     // get 'uncompressed' public key & remove first byte 'prefix'
     const uncompressedPublicKeyBuffer = secp256k1.publicKeyConvert(childkey.publicKey, false).slice(1)
-
+    
+    // derive ethereum address from public key
+    const address = deriveEthereumAddress(uncompressedPublicKeyBuffer)
+    
     accounts.push({
       path: path,
-      address: deriveEthereumAddress(uncompressedPublicKeyBuffer),
+      address: createChecksumFromAddress(address),
       privateKey: childkey.privateKey.toString('hex'),
       publicKey: childkey.publicKey.toString('hex')
     })

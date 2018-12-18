@@ -89,5 +89,6 @@ async function eip55Checksum() {
 }
 
 module.exports = {
+  createChecksumFromAddress,
   eip55Checksum
 }
