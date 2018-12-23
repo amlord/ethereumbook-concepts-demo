@@ -44,7 +44,7 @@ function deriveHdWalletAccounts(seed, account = 0, child = 0, results = 1) {
 
     // get 'uncompressed' public key & remove first byte 'prefix'
     const uncompressedPublicKeyBuffer = secp256k1.publicKeyConvert(childkey.publicKey, false).slice(1)
-    
+ 
     // derive ethereum address from public key
     const address = deriveEthereumAddress(uncompressedPublicKeyBuffer)
     

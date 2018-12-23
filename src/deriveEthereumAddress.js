@@ -76,7 +76,7 @@ async function deriveAndDisplayEthereumAddress() {
   // remove the prefix (should always be '04' for an uncompressed publicKey)
   const publicKeyWithoutPrefix = publicKey.substring(2)
 
-  const ethereumAddress = deriveEthereumAddress(publicKeyWithoutPrefix)
+  const ethereumAddress = deriveEthereumAddress(Buffer.from(publicKeyWithoutPrefix, 'hex'))
 
   console.log('\n')
   console.log(`> Private Key:\n\n${privateKey ? style.secondary(privateKey) : style.note("(UNKNOWN)")}`)
