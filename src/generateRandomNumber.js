@@ -15,9 +15,9 @@ const BigNumber = require('bignumber.js')
 
 /**
  * Generates a cryptographically-secure pseudo-random number
- * 
+ *
  * @property {Number} [bits=256] - number of bits to generate a random number
- * 
+ *
  * @returns {RandomNumber} - Returns an object containing a random number to different bases
  */
 function generateRandomNumber(bits = 256) {
@@ -31,7 +31,7 @@ function generateRandomNumber(bits = 256) {
   return {
     base16: base16Result,
     base10: base10Result,
-    base2: base2Result
+    base2: base2Result,
   }
 }
 
@@ -39,12 +39,12 @@ function generateAndDisplayRandomNumber() {
   const randomNumber = generateRandomNumber()
 
   console.log('\n')
-  console.log(`> hexadecimal: ${style.note("(base16)")}\n\n${style.primary(randomNumber.base16)}\n\n`)
-  console.log(`> decimal: ${style.note("(base10)")}\n\n${style.primary(randomNumber.base10)}\n\n`)
-  console.log(`> binary: ${style.note("(base2)")}\n\n${style.primary(randomNumber.base2)}`)
+  console.log(`> hexadecimal: ${style.note('(base16)')}\n\n${style.primary(randomNumber.base16)}\n\n`)
+  console.log(`> decimal: ${style.note('(base10)')}\n\n${style.primary(randomNumber.base10)}\n\n`)
+  console.log(`> binary: ${style.note('(base2)')}\n\n${style.primary(randomNumber.base2)}`)
 }
 
 module.exports = {
   generateRandomNumber,
-  generateAndDisplayRandomNumber
+  generateAndDisplayRandomNumber,
 }

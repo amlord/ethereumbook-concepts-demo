@@ -12,5 +12,5 @@ module.exports = {
   primary,
   secondary,
   note,
-  error
+  error,
 }

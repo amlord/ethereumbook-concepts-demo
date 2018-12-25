@@ -7,7 +7,6 @@ describe('generateRandomNumber()', () => {
   const bits = 256
   const { base16, base10, base2 } = generateRandomNumber(bits)
 
-
   it('creates number less than or equal to specified length (bits)', () => {
     expect(base2.length <= bits).toBe(true)
   })

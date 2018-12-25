@@ -11,11 +11,14 @@ function validEllipticCurveCoordinates(x, y) {
   const xCoord = BigNumber(x)
   const yCoord = BigNumber(y)
 
-  return xCoord.exponentiatedBy(3)
-          .plus(7)
-          .minus(yCoord.exponentiatedBy(2))
-          .modulo(primeOrder)
-          .toString(10) === "0"
+  return (
+    xCoord
+      .exponentiatedBy(3)
+      .plus(7)
+      .minus(yCoord.exponentiatedBy(2))
+      .modulo(primeOrder)
+      .toString(10) === '0'
+  )
 }
 
 async function ellipticCurveCheck() {
@@ -23,20 +26,24 @@ async function ellipticCurveCheck() {
   let yCoord = '59574132161899900045862086493921015780032175291755807399284007721050341297360'
 
   // prompt user to enter x-coordinate
-  const xResponse = await inquirer.prompt([{
-    type: 'input',
-    name: 'xCoord',
-    message: 'X-axis co-ordinate',
-    default: xCoord
-  }])
+  const xResponse = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'xCoord',
+      message: 'X-axis co-ordinate',
+      default: xCoord,
+    },
+  ])
 
   // prompt user to enter y-coordinate
-  const yResponse = await inquirer.prompt([{
-    type: 'input',
-    name: 'yCoord',
-    message: 'Y-axis co-ordinate',
-    default: yCoord
-  }])
+  const yResponse = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'yCoord',
+      message: 'Y-axis co-ordinate',
+      default: yCoord,
+    },
+  ])
 
   const result = validEllipticCurveCoordinates(xCoord, yCoord)
 
@@ -44,10 +51,10 @@ async function ellipticCurveCheck() {
   console.log(`> Prime Order of the secp256k1 curve:\n\n${style.secondary(primeOrder.toString(10))}\n\n`)
   console.log(`> X-axis co-ordinate:\n\n${style.secondary(xCoord.toString(10))}\n\n`)
   console.log(`> Y-axis co-ordinate:\n\n${style.secondary(yCoord.toString(10))}\n\n`)
-  console.log(`> Outcome:\n\n${result ? style.primary("***** CO-ORDINATES ON CURVE *****") : style.error("!!!!! INVALID CO-ORDINATES !!!!!")}`)
+  console.log(`> Outcome:\n\n${result ? style.primary('***** CO-ORDINATES ON CURVE *****') : style.error('!!!!! INVALID CO-ORDINATES !!!!!')}`)
 }
 
 module.exports = {
   validEllipticCurveCoordinates,
-  ellipticCurveCheck
+  ellipticCurveCheck,
 }

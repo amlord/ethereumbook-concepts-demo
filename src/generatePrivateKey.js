@@ -8,15 +8,17 @@ const createKeccakHash = require('keccak')
 
 /**
  * Generates a private key, either at random or from supplied random number (in bits)
- * 
+ *
  * @property {Number} [bits=256] - number of bits to generate a random number
- * 
+ *
  * @returns {String} - Returns private key as hexadecimal string
  */
 function generatePrivateKey(randomBits = null) {
-  if(randomBits) {
+  if (randomBits) {
     // create 256-bit hash using the random bits
-    return createKeccakHash('keccak256').update(randomBits).digest('hex')
+    return createKeccakHash('keccak256')
+      .update(randomBits)
+      .digest('hex')
   }
 
   // generate the random string of bits (needs to be larger than 256)
@@ -31,10 +33,10 @@ function generateAndDisplayPrivateKey() {
   const privateKey = generatePrivateKey(randomBits)
 
   console.log('\n')
-  console.log(`${style.header("> Generated Private Key: ")}${style.note("(hexadecimal)")}\n\n${style.primary(privateKey)}`)
+  console.log(`${style.header('> Generated Private Key: ')}${style.note('(hexadecimal)')}\n\n${style.primary(privateKey)}`)
 }
 
 module.exports = {
   generatePrivateKey,
-  generateAndDisplayPrivateKey
+  generateAndDisplayPrivateKey,
 }
