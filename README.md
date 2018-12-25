@@ -32,6 +32,12 @@ Run test suite:
 yarn test
 ```
 
+## Lint
+Run code formatter:
+```javascript
+yarn lint
+```
+
 ## Functionality
 1. Generate CSPRN (cryptographically secure pseudo-random number)
 1. Generate Private Key
