@@ -3,7 +3,7 @@ A CLI for demonstration of concepts in the "Mastering Ethereum" book by Andreas 
 
 
 ## Node Version 
-This CLI uses node **v11.4**, some functionality _may not work_ with lower versions.
+This CLI uses node **v10.14.2**, some functionality _may not work_ with lower versions.
 
 If you're using [NVM](https://github.com/creationix/nvm), simply run:
 ```javascript
@@ -21,8 +21,15 @@ yarn install
 ```
 
 ## Run
+Start the CLI:
 ```javascript
-yarn run start
+yarn start
+```
+
+## Test
+Run test suite:
+```javascript
+yarn test
 ```
 
 ## Functionality
