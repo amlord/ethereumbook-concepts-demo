@@ -10,6 +10,14 @@ const secp256k1 = require('secp256k1')
 // handle big numbers in js
 const BigNumber = require('bignumber.js')
 
+/**
+ * Derive Public Key from Private Key
+ * 
+ * @property {Buffer} privateKey - buffer containing private key
+ * @property {Boolean} [compressed=false] - flag for type of public key to return (compressed / uncompressed)
+ * 
+ * @returns {String} - Returns a string containing the public key
+ */
 function derivePublicKey(privateKey, compressed = false) {
   // check private key is valid
   if(!secp256k1.privateKeyVerify(privateKey)) {

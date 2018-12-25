@@ -15,6 +15,10 @@ const createKeccakHash = require('keccak')
  * @returns {String} - Returns a string containing the ethereum address
  */
 function deriveEthereumAddress(publicKey) {
+  if(!Buffer.isBuffer(publicKey)){
+    throw TypeError('Expected: `publicKey` to be Buffer')
+  }
+
   // take Keccak-256 hash of public key
   const publicKeyHash = createKeccakHash('keccak256').update(publicKey).digest('hex')
   const publicKeyHashbuffer = Buffer.from(publicKeyHash, 'hex')

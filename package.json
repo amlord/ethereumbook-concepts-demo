@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "start:dev": "nodemon ."
+    "start:dev": "nodemon .",
+    "test": "jest"
   },
   "repository": "https://github.com/amlord/ethereumbook-concepts-demo.git",
   "author": "Andrew Lord <me@andrewlord.uk>",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
   "dependencies": {
     "bignumber.js": "^8.0.1",
     "chalk": "^2.4.1",
