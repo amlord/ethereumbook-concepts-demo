@@ -9,19 +9,37 @@ const { deriveEthereumAddress } = require('./deriveEthereumAddress')
 // keccak secure hashing function
 const createKeccakHash = require('keccak')
 
-async function createChecksumFromAddress(address) {
+/**
+ * Create checksum for Ethereum address
+ * 
+ * @property {String} address - Ethereum address
+ * 
+ * @returns {String} - Returns a string containing the address encoded with checksum
+ */
+function createChecksumFromAddress(address) {
   const addressHash = createKeccakHash('keccak256').update(address.toLowerCase()).digest('hex')
   
   const addressArray = address.split('')
   const hashArray = addressHash.split('')
 
   const checksumArray = addressArray.map((character, index) => {
-    return (parseInt(`0x${hashArray[index]}`) > 8)
+    return (parseInt(`0x${hashArray[index]}`) >= 8)
       ? character.toUpperCase()
       : character.toLowerCase()
   })
 
   return checksumArray.join('')
+}
+
+/**
+ * Validate a checksum address
+ * 
+ * @property {String} checksum - Checksum-encoded Ethereum address
+ * 
+ * @returns {Boolean} - Returns a boolean containing the checksum validity
+ */
+function validChecksum(checksum) {
+  return checksum === createChecksumFromAddress(checksum)
 }
 
 async function createChecksum() {
@@ -54,7 +72,7 @@ async function validateAddress() {
     message: 'Ethereum Checksum Address'
   }])
 
-  const checksum = await createChecksumFromAddress(address)
+  const checksum = createChecksumFromAddress(address)
 
   console.log('\n')
   console.log(`> Input Checksum Address:\n\n${style.secondary(address)}\n\n`)
@@ -90,5 +108,6 @@ async function eip55Checksum() {
 
 module.exports = {
   createChecksumFromAddress,
+  validChecksum,
   eip55Checksum
 }

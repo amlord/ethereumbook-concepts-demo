@@ -46,12 +46,13 @@ const mnemonicMap = {
  * Generate a Mnemomic for a "deterministic wallet" seed
  * 
  * @property {Number} [numberOfWords=12] - length in words of the mnemonic to be generated (12, 15, 18, 21, 24)
+ * @property {Buffer} [mnemonicRandomNumber] - random number buffer to generate mnemonic from
  * 
  * @returns {MnemonicDetails} - Returns an object containing the mnemonic, seed & checksum
  */
-function generateMnemonic(numberOfWords = 12) {
+function generateMnemonic(numberOfWords = 12, mnemonicRandomNumber) {
   // generate a random number, length determined by the entropy required
-  const randomNumber = randomBytes(mnemonicMap[numberOfWords].entropyBits / 8)
+  const randomNumber = mnemonicRandomNumber || randomBytes(mnemonicMap[numberOfWords].entropyBits / 8)
 
   // hash random number
   const randomNumberHash = createHash('sha256').update(randomNumber).digest()
@@ -82,6 +83,18 @@ function generateMnemonic(numberOfWords = 12) {
     words: mnemonic,
     sentence: mnemonic.join(' ')
   }
+}
+
+/**
+ * Derive seed for a "deterministic wallet"
+ * 
+ * @property {String} mnemonic - mnemonic sentance of words
+ * @property {String} [passphrase] - optional passphrase
+ * 
+ * @returns {String} - Returns a string containing the wallet seed (hex)
+ */
+function deriveDeterministicWalletSeed(mnemonic, passphrase = '') {
+  return pbkdf2Sync(mnemonic, `mnemonic${passphrase}`, 2048, (512 / 8), 'sha512').toString('hex')
 }
 
 async function generateAndDisplayMnemonic() {
@@ -136,14 +149,14 @@ async function generateAndDisplayMnemonic() {
     default: ''
   }])
 
-
-  const seed = pbkdf2Sync(mnemonic.sentence, `mnemonic${passphrase}`, 2048, (512 / 8), 'sha512')
+  const seed = deriveDeterministicWalletSeed(mnemonic.sentence, passphrase)
 
   console.log('\n')
-  console.log(style.header('> Deterministic Wallet Seed:\n\n') + style.primary(seed.toString('hex')))
+  console.log(style.header('> Deterministic Wallet Seed:\n\n') + style.primary(seed))
 }
 
 module.exports = {
   generateMnemonic,
+  deriveDeterministicWalletSeed,
   generateAndDisplayMnemonic
 }
