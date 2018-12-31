@@ -12,23 +12,23 @@ unlock = ["0xf9e5f26f88106c43d2d8df3c79e7ef4b44d1c208"]
 reserved_peers = "/config/reserved_peers"
 reserved_only = true
 
-# [rpc]
-# interface = "0.0.0.0"
-# cors = "all"
-# hosts = ["all"]
-# apis = ["web3", "eth", "net", "parity", "traces", "rpc", "personal", "parity_accounts", "signer", "parity_set"]
+[rpc]
+interface = "0.0.0.0"
+cors = ["all"]
+hosts = ["all"]
+apis = ["web3", "eth", "net", "parity", "traces", "rpc", "personal", "parity_accounts", "signer", "parity_set"]
 
 [mining]
 reseal_max_period = 3600000
 gas_floor_target = "5000000000"
 engine_signer = "0xf9e5f26f88106c43d2d8df3c79e7ef4b44d1c208"
 
-# [websockets]
-# interface = "0.0.0.0"
-# disable = false
-# port = 8546
-# origins = ["all"]
-# hosts = ["all"]
+[websockets]
+interface = "0.0.0.0"
+disable = false
+port = 8546
+origins = ["all"]
+hosts = ["all"]
 
 [misc]
 logging = "info"
