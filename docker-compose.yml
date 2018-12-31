@@ -26,3 +26,16 @@ services:
       - ./parity/chain.json:/config/chain.json
       - ./parity/reserved_peers:/config/reserved_peers
     command: --config /mnt/config.toml
+
+  parity3:
+    container_name: parity3
+    ports:
+      - 10545:8545
+      - 10546:8546
+    image: parity/parity:v2.1.10
+    volumes:
+      - ./parity/nodes/3:/mnt
+      - ./parity/nodes/3/accounts/admin.password.txt:/config/admin.password.txt
+      - ./parity/chain.json:/config/chain.json
+      - ./parity/reserved_peers:/config/reserved_peers
+    command: --config /mnt/config.toml
