@@ -39,3 +39,17 @@ services:
       - ./parity/chain.json:/config/chain.json
       - ./parity/reserved_peers:/config/reserved_peers
     command: --config /mnt/config.toml
+
+  monitor:
+    container_name: monitor
+    image: buythewhale/ethstats_monitor
+    volumes:
+    - ./parity/monitor/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
+
+  dashboard:
+    container_name: dashboard
+    image: buythewhale/ethstats
+    volumes:
+    - ./parity/dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
+    ports:
+    - 3000:3000

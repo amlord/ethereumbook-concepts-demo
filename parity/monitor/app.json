@@ -1,0 +1,62 @@
+[
+  {
+    "name": "parity1",
+    "script": "app.js",
+    "log_date_format": "YYYY-MM-DD HH:mm Z",
+    "merge_logs": false,
+    "watch": true,
+    "max_restarts": 10,
+    "exec_interpreter": "node",
+    "exec_mode": "fork_mode",
+    "env": {
+      "NODE_ENV": "production",
+      "RPC_HOST": "parity1",
+      "RPC_PORT": "8545",
+      "LISTENING_PORT": "30303",
+      "INSTANCE_NAME": "parity1",
+      "WS_SERVER": "ws://dashboard:3000",
+      "WS_SECRET": "vW47j=uR4yeFWbXTfFoma%@Gou6hhTpTCZQ@b8=R",
+      "VERBOSITY": 3
+    }
+  },
+  {
+    "name": "parity2",
+    "script": "app.js",
+    "log_date_format": "YYYY-MM-DD HH:mm Z",
+    "merge_logs": false,
+    "watch": true,
+    "max_restarts": 10,
+    "exec_interpreter": "node",
+    "exec_mode": "fork_mode",
+    "env": {
+      "NODE_ENV": "production",
+      "RPC_HOST": "parity2",
+      "RPC_PORT": "9545",
+      "LISTENING_PORT": "30303",
+      "INSTANCE_NAME": "parity2",
+      "WS_SERVER": "ws://dashboard:3000",
+      "WS_SECRET": "vW47j=uR4yeFWbXTfFoma%@Gou6hhTpTCZQ@b8=R",
+      "VERBOSITY": 3
+    }
+  },
+  {
+    "name": "parity3",
+    "script": "app.js",
+    "log_date_format": "YYYY-MM-DD HH:mm Z",
+    "merge_logs": false,
+    "watch": true,
+    "max_restarts": 10,
+    "exec_interpreter": "node",
+    "exec_mode": "fork_mode",
+    "env": {
+      "NODE_ENV": "production",
+      "RPC_HOST": "parity3",
+      "RPC_PORT": "10545",
+      "LISTENING_PORT": "30303",
+      "INSTANCE_NAME": "parity3",
+      "WS_SERVER": "ws://dashboard:3000",
+      "WS_SECRET": "vW47j=uR4yeFWbXTfFoma%@Gou6hhTpTCZQ@b8=R",
+      "VERBOSITY": 3
+    }
+  }
+]
