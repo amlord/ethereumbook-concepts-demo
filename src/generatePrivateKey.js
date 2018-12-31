@@ -30,7 +30,7 @@ function generatePrivateKey(randomBits = null) {
 
 function generateAndDisplayPrivateKey() {
   // generate private key
-  const privateKey = generatePrivateKey(randomBits)
+  const privateKey = generatePrivateKey()
 
   console.log('\n')
   console.log(`${style.header('> Generated Private Key: ')}${style.note('(hexadecimal)')}\n\n${style.primary(privateKey)}`)
