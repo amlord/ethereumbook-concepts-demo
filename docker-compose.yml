@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+  parity1:
+    container_name: parity1
+    ports:
+      - 8545:8545
+      - 8546:8546
+    image: parity/parity:v2.1.10
+    volumes:
+      - ./parity/nodes/1:/mnt
+      - ./parity/nodes/1/accounts/admin.password.txt:/config/admin.password.txt
+      - ./parity/chain.json:/config/chain.json
+      - ./parity/reserved_peers:/config/reserved_peers
+    command: --config /mnt/config.toml

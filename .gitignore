@@ -62,3 +62,7 @@ typings/
 
 # local todo list
 backlog.todo
+
+# local parity
+parity/nodes/**/cache/
+parity/nodes/**/chains/

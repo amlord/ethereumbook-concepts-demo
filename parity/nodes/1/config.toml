@@ -1,0 +1,34 @@
+[parity]
+base_path = "/mnt"
+keys_path = "/mnt/keys"
+db_path = "/mnt/chains"
+chain = "/config/chain.json"
+
+[account]
+password = ["/config/admin.password.txt"]
+unlock = ["0x21f641df60fc1d256883e81fea641573c46e1ae9"]
+
+[network]
+reserved_peers = "/config/reserved_peers"
+reserved_only = true
+
+# [rpc]
+# interface = "0.0.0.0"
+# cors = "all"
+# hosts = ["all"]
+# apis = ["web3", "eth", "net", "parity", "traces", "rpc", "personal", "parity_accounts", "signer", "parity_set"]
+
+[mining]
+reseal_max_period = 3600000
+gas_floor_target = "5000000000"
+engine_signer = "0x21f641df60fc1d256883e81fea641573c46e1ae9"
+
+# [websockets]
+# interface = "0.0.0.0"
+# disable = false
+# port = 8546
+# origins = ["all"]
+# hosts = ["all"]
+
+[misc]
+logging = "info"
