@@ -31,7 +31,7 @@
     "env": {
       "NODE_ENV": "production",
       "RPC_HOST": "parity2",
-      "RPC_PORT": "9545",
+      "RPC_PORT": "8545",
       "LISTENING_PORT": "30303",
       "INSTANCE_NAME": "parity2",
       "WS_SERVER": "ws://dashboard:3000",
@@ -51,7 +51,7 @@
     "env": {
       "NODE_ENV": "production",
       "RPC_HOST": "parity3",
-      "RPC_PORT": "10545",
+      "RPC_PORT": "8545",
       "LISTENING_PORT": "30303",
       "INSTANCE_NAME": "parity3",
       "WS_SERVER": "ws://dashboard:3000",

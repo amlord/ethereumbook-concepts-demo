@@ -52,4 +52,4 @@ services:
     volumes:
     - ./parity/dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
     ports:
-    - 3000:3000
+    - 3001:3000
