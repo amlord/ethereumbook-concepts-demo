@@ -38,7 +38,8 @@ Run code formatter:
 yarn lint
 ```
 
-## Functionality
+## Basic Functionality
+_(Parity node not required to be running)_
 1. Generate CSPRN (cryptographically secure pseudo-random number)
 1. Generate Private Key
 1. Derive Public Key from Private Key
@@ -47,3 +48,7 @@ yarn lint
 1. Ethereum Address Checksum (EIP-55)
 1. Generate Mnemonic (BIP-39)
 1. Derive Hierarchical Deterministic (HD) Wallet Accounts (BIP-44)
+
+## Advanced Functionality
+(To run these options, first [start the Parity cluster](./parity/README.md))
+1. Get Parity Network Status

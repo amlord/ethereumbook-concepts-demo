@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 const inquirer = require('inquirer')
+
+// basic functionality
 const { generateAndDisplayRandomNumber } = require('./src/generateRandomNumber')
 const { generateAndDisplayPrivateKey } = require('./src/generatePrivateKey')
 const { deriveAndDisplayPublicKey } = require('./src/derivePublicKey')
@@ -10,6 +12,10 @@ const { eip55Checksum } = require('./src/eip55Checksum')
 const { generateAndDisplayMnemonic } = require('./src/generateMnemonic')
 const { deriveAndDisplayHdWalletAccounts } = require('./src/deriveHdWalletAccounts')
 
+// advanced functionality
+const { getParityNetworkStatus } = require('./src/advanced/getParityNetworkStatus')
+
+// exit
 const quit = require('./src/quit')
 
 
@@ -55,6 +61,13 @@ async function execute() {
       short: 'HD Wallet Accounts',
       value: 'deriveHdWalletAccounts'
     },
+    new inquirer.Separator(),
+    {
+      name: 'Get Parity Network Status',
+      short: 'Network Status',
+      value: 'getParityNetworkStatus'
+    },
+    new inquirer.Separator(),
     {
       name: 'Quit',
       short: 'Quit',
@@ -72,6 +85,8 @@ async function execute() {
     } ])
 
     switch (action) {
+      // basic functionality
+
       case 'generateRandomNumber':
         generateAndDisplayRandomNumber()
         break
@@ -103,7 +118,15 @@ async function execute() {
       case 'deriveHdWalletAccounts':
         await deriveAndDisplayHdWalletAccounts()
         break
-        
+
+      // advanced functionality (parity cluster required)
+      
+      case 'getParityNetworkStatus':
+        await getParityNetworkStatus()
+        break
+      
+      // quit CLI
+      
       case 'quit':
         quit()
         break
