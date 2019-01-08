@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
 const inquirer = require('inquirer')
+const style = require('./src/helpers/textStyle')
+
+// basic functionality
 const { generateAndDisplayRandomNumber } = require('./src/generateRandomNumber')
 const { generateAndDisplayPrivateKey } = require('./src/generatePrivateKey')
 const { deriveAndDisplayPublicKey } = require('./src/derivePublicKey')
@@ -10,10 +13,20 @@ const { eip55Checksum } = require('./src/eip55Checksum')
 const { generateAndDisplayMnemonic } = require('./src/generateMnemonic')
 const { deriveAndDisplayHdWalletAccounts } = require('./src/deriveHdWalletAccounts')
 
+// advanced functionality
+const { getParityNetworkStatus } = require('./src/advanced/getParityNetworkStatus')
+
+// exit
 const quit = require('./src/quit')
 
+const nodeVersion = Number(process.version.match(/^v(\d+\.\d+)/)[1])
 
 async function execute() {
+  if(nodeVersion < 10) {
+    console.log(`\n\n${style.error(`!!!!!  Node v10 or greater required (found ${process.version}) !!!!!`)}\n\n`)
+    return
+  }
+
   const actions = [ 
     {
       name: 'Generate CSPRN (cryptographically secure pseudo-random number)',
@@ -55,11 +68,19 @@ async function execute() {
       short: 'HD Wallet Accounts',
       value: 'deriveHdWalletAccounts'
     },
+    new inquirer.Separator(),
+    {
+      name: 'Get Parity Network Status',
+      short: 'Network Status',
+      value: 'getParityNetworkStatus'
+    },
+    new inquirer.Separator(),
     {
       name: 'Quit',
       short: 'Quit',
       value: 'quit'
-    }
+    },
+    new inquirer.Separator()
   ]
 
   while (true) {
@@ -72,6 +93,8 @@ async function execute() {
     } ])
 
     switch (action) {
+      // basic functionality
+
       case 'generateRandomNumber':
         generateAndDisplayRandomNumber()
         break
@@ -103,7 +126,15 @@ async function execute() {
       case 'deriveHdWalletAccounts':
         await deriveAndDisplayHdWalletAccounts()
         break
-        
+
+      // advanced functionality (parity cluster required)
+      
+      case 'getParityNetworkStatus':
+        await getParityNetworkStatus()
+        break
+      
+      // quit CLI
+      
       case 'quit':
         quit()
         break

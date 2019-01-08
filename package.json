@@ -7,6 +7,8 @@
     "start": "node .",
     "start:dev": "nodemon .",
     "test": "jest",
+    "parity:start": "docker-compose up parity1 parity2 parity3",
+    "parity:monitor": "docker-compose up monitor dashboard",
     "lint": "prettier --config ./.prettierrc --write \"./src/**/*.js\""
   },
   "repository": "https://github.com/amlord/ethereumbook-concepts-demo.git",
@@ -17,6 +19,7 @@
     "prettier": "1.15.3"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bignumber.js": "^8.0.1",
     "chalk": "^2.4.1",
     "crypto": "^1.0.1",
