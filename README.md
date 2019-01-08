@@ -1,43 +1,6 @@
 # Mastering Ethereum Book - Concepts Demo CLI
 A CLI for demonstration of concepts in the "Mastering Ethereum" book by Andreas M. Antonopoulos
 
-
-## Node Version 
-This CLI uses node **v10.14.2**, some functionality _may not work_ with lower versions.
-
-If you're using [NVM](https://github.com/creationix/nvm), simply run:
-```javascript
-nvm use
-```
-Otherwise, check which version you're using:
-```javascript
-node -v
-```
-...and upgrade if necessary.
-
-## Install
-```javascript
-yarn install
-```
-
-## Run
-Start the CLI:
-```javascript
-yarn start
-```
-
-## Test
-Run test suite:
-```javascript
-yarn test
-```
-
-## Lint
-Run code formatter:
-```javascript
-yarn lint
-```
-
 ## Basic Functionality
 _(Parity node not required to be running)_
 1. Generate CSPRN (cryptographically secure pseudo-random number)
@@ -52,3 +15,45 @@ _(Parity node not required to be running)_
 ## Advanced Functionality
 (To run these options, first [start the Parity cluster](./parity/README.md))
 1. Get Parity Network Status
+1. Transfer Funds to Account
+1. Get Transaction by Hash
+1. Get Account Balance
+
+---
+## Running the CLI
+
+### Node Version 
+This CLI uses node **v10.14.2**, some functionality _may not work_ with lower versions.
+
+If you're using [NVM](https://github.com/creationix/nvm), simply run:
+```javascript
+nvm use
+```
+Otherwise, check which version you're using:
+```javascript
+node -v
+```
+...and upgrade if necessary.
+
+### Install
+```javascript
+yarn install
+```
+
+### Run
+Start the CLI:
+```javascript
+yarn start
+```
+
+### Test
+Run test suite:
+```javascript
+yarn test
+```
+
+### Lint
+Run code formatter:
+```javascript
+yarn lint
+```
