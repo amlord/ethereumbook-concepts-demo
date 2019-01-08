@@ -15,6 +15,9 @@ const { deriveAndDisplayHdWalletAccounts } = require('./src/deriveHdWalletAccoun
 
 // advanced functionality
 const { getParityNetworkStatus } = require('./src/advanced/getParityNetworkStatus')
+const { transferFunds } = require('./src/advanced/transferFunds')
+const { getTransaction } = require('./src/advanced/getTransaction')
+const { getAccountBalance } = require('./src/advanced/getAccountBalance')
 
 // exit
 const quit = require('./src/quit')
@@ -74,6 +77,21 @@ async function execute() {
       short: 'Network Status',
       value: 'getParityNetworkStatus'
     },
+    {
+      name: 'Transfer Funds to Account',
+      short: 'Transfer Funds',
+      value: 'transferFunds'
+    },
+    {
+      name: 'Get Transaction by Hash',
+      short: 'Get Transaction',
+      value: 'getTransaction'
+    },
+    {
+      name: 'Get Account Balance',
+      short: 'Account Balance',
+      value: 'getAccountBalance'
+    },
     new inquirer.Separator(),
     {
       name: 'Quit',
@@ -131,6 +149,18 @@ async function execute() {
       
       case 'getParityNetworkStatus':
         await getParityNetworkStatus()
+        break
+      
+      case 'transferFunds':
+        await transferFunds()
+        break
+    
+      case 'getTransaction':
+        await getTransaction()
+        break
+  
+      case 'getAccountBalance':
+        await getAccountBalance()
         break
       
       // quit CLI
