@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const inquirer = require('inquirer')
+const style = require('./src/helpers/textStyle')
 
 // basic functionality
 const { generateAndDisplayRandomNumber } = require('./src/generateRandomNumber')
@@ -18,8 +19,14 @@ const { getParityNetworkStatus } = require('./src/advanced/getParityNetworkStatu
 // exit
 const quit = require('./src/quit')
 
+const nodeVersion = Number(process.version.match(/^v(\d+\.\d+)/)[1])
 
 async function execute() {
+  if(nodeVersion < 10) {
+    console.log(`\n\n${style.error(`!!!!!  Node v10 or greater required (found ${process.version}) !!!!!`)}\n\n`)
+    return
+  }
+
   const actions = [ 
     {
       name: 'Generate CSPRN (cryptographically secure pseudo-random number)',
@@ -72,7 +79,8 @@ async function execute() {
       name: 'Quit',
       short: 'Quit',
       value: 'quit'
-    }
+    },
+    new inquirer.Separator()
   ]
 
   while (true) {
