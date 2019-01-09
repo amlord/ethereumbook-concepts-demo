@@ -13,9 +13,9 @@ _(Parity node not required to be running)_
 1. Derive Hierarchical Deterministic (HD) Wallet Accounts (BIP-44)
 
 ## Advanced Functionality
-(To run these options, first [start the Parity cluster](./parity/README.md))
+_(To run these options, first [start the Parity cluster](./parity/README.md))_
 1. Get Parity Network Status
-1. Transfer Funds to Account
+1. Transfer Funds to Account (using admin account)
 1. Get Transaction by Hash
 1. Get Account Balance
 
