@@ -9,7 +9,7 @@ async function transferFunds() {
       type: 'input',
       name: 'toAddress',
       message: 'Send funds to (address)',
-      default: '0xd46e8dd67c5d32be8058bb8eb970870f07244567'
+      default: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
     },
   ])
 
@@ -19,12 +19,12 @@ async function transferFunds() {
       type: 'input',
       name: 'value',
       message: 'Transfer Amount',
-      default: '1000000'
+      default: '1000000',
     },
   ])
   const numberValue = parseInt(value)
 
-  if(isNaN(numberValue)) {
+  if (isNaN(numberValue)) {
     console.log('\n')
     console.log(`> ${style.error('!!!!! Value must be an integer !!!!!')}\n\n`)
     return
@@ -37,5 +37,5 @@ async function transferFunds() {
 }
 
 module.exports = {
-  transferFunds
+  transferFunds,
 }

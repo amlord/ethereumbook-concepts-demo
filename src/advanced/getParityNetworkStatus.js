@@ -7,9 +7,7 @@ async function getParityNetworkStatus() {
   const parity3 = await getNodeStatus('parity3:10545')
   let networkStatus
 
-  if(parity1.blockHash === parity2.blockHash &&
-    parity2.blockHash === parity3.blockHash)
-  {
+  if (parity1.blockHash === parity2.blockHash && parity2.blockHash === parity3.blockHash) {
     networkStatus = style.primary('In Sync')
   } else {
     networkStatus = style.error('Forked')
@@ -21,5 +19,5 @@ async function getParityNetworkStatus() {
 }
 
 module.exports = {
-  getParityNetworkStatus
+  getParityNetworkStatus,
 }

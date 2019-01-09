@@ -8,16 +8,16 @@ async function getTransaction() {
     {
       type: 'input',
       name: 'transactionHash',
-      message: 'Transaction hash'
+      message: 'Transaction hash',
     },
   ])
-  
+
   const transaction = await getTransactionByHash(transactionHash)
 
   console.log('\n')
   console.log('> Transaction:\n')
 
-  if(transaction) {
+  if (transaction) {
     console.table(transaction)
   } else {
     console.log(style.error('!!!!! Not Found !!!!!'))
@@ -25,5 +25,5 @@ async function getTransaction() {
 }
 
 module.exports = {
-  getTransaction
+  getTransaction,
 }

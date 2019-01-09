@@ -9,7 +9,7 @@ async function getAccountBalance() {
       type: 'input',
       name: 'account',
       message: 'Account Address',
-      default: '0xd46e8dd67c5d32be8058bb8eb970870f07244567'
+      default: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
     },
   ])
 
@@ -20,5 +20,5 @@ async function getAccountBalance() {
 }
 
 module.exports = {
-  getAccountBalance
+  getAccountBalance,
 }

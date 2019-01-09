@@ -51,7 +51,9 @@ async function getNodeStatus(node = 'parity1:8545') {
 }
 
 async function transferFundsToAccount(to, value) {
-  const { data: { result: transactionHash } } = await axios.post('http://parity1:8545', {
+  const {
+    data: { result: transactionHash },
+  } = await axios.post('http://parity1:8545', {
     jsonrpc: '2.0',
     method: 'eth_sendTransaction',
     params: [
@@ -60,26 +62,28 @@ async function transferFundsToAccount(to, value) {
         to,
         gas: '0x76c0', // 30400
         gasPrice: '0x9184e72a000', // 10000000000000
-        value
+        value,
       },
     ],
-    id: 1
+    id: 1,
   })
 
   return {
-    transactionHash
+    transactionHash,
   }
 }
 
 async function getTransactionByHash(transactionHash) {
-  const { data: { result: transaction } } = await axios.post('http://parity1:8545', {
+  const {
+    data: { result: transaction },
+  } = await axios.post('http://parity1:8545', {
     jsonrpc: '2.0',
     method: 'eth_getTransactionByHash',
-    params: [ transactionHash ],
-    id: 1
+    params: [transactionHash],
+    id: 1,
   })
 
-  if(!transaction) {
+  if (!transaction) {
     return
   }
 
@@ -88,28 +92,26 @@ async function getTransactionByHash(transactionHash) {
     blockNumber: parseInt(transaction.blockNumber, 16),
     from: transaction.from,
     nonce: parseInt(transaction.nonce, 16),
-    value: parseInt(transaction.value, 16)
+    value: parseInt(transaction.value, 16),
   }
 }
 
 async function getAccountBalance(address) {
-  const { data: { result: balance } } = await axios.post('http://parity1:8545', {
+  const {
+    data: { result: balance },
+  } = await axios.post('http://parity1:8545', {
     jsonrpc: '2.0',
     method: 'eth_getBalance',
-    params: [
-      address,
-      'latest'
-    ],
-    id: 1
+    params: [address, 'latest'],
+    id: 1,
   })
 
   return parseInt(balance, 16)
 }
 
-
 module.exports = {
   getNodeStatus,
   transferFundsToAccount,
   getTransactionByHash,
-  getAccountBalance
+  getAccountBalance,
 }
