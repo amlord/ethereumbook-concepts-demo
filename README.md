@@ -15,9 +15,11 @@ _(Parity node not required to be running)_
 ## Advanced Functionality
 _(To run these options, first [start the Parity cluster](./parity/README.md))_
 1. Get Parity Network Status
-1. Transfer Funds to Account (using admin account)
+1. Transfer Funds to Account (from admin account)
 1. Get Transaction by Hash
 1. Get Account Balance
+1. Create Raw Signed Transaction (transfer of funds)
+1. Send Raw Transaction to Network
 
 ---
 ## Running the CLI

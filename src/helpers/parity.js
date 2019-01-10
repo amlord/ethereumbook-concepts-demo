@@ -7,6 +7,19 @@ function formatClientVersion(rawClientVersion) {
   return Array.isArray(result) ? result[0] : 'unknown'
 }
 
+async function getNextNonce(address) {
+  const {
+    data: { result },
+  } = await axios.post('http://parity1:8545', {
+    jsonrpc: '2.0',
+    method: 'parity_nextNonce',
+    params: [ address ],
+    id: 1,
+  })
+
+  return result
+}
+
 async function getNodeStatus(node = 'parity1:8545') {
   // batch request node status data
   const {
@@ -51,6 +64,11 @@ async function getNodeStatus(node = 'parity1:8545') {
 }
 
 async function transferFundsToAccount(to, value) {
+  const adminAddressParity1 = '0x21f641df60fc1d256883e81fea641573c46e1ae9'
+
+  // get the next nonce for this account (from parity)
+  const nonce = await getNextNonce(adminAddressParity1)
+
   const {
     data: { result: transactionHash },
   } = await axios.post('http://parity1:8545', {
@@ -58,11 +76,12 @@ async function transferFundsToAccount(to, value) {
     method: 'eth_sendTransaction',
     params: [
       {
-        from: '0x21f641df60fc1d256883e81fea641573c46e1ae9', // 'parity1' admin account
+        from: adminAddressParity1,
         to,
         gas: '0x76c0', // 30400
         gasPrice: '0x9184e72a000', // 10000000000000
         value,
+        nonce
       },
     ],
     id: 1,
@@ -109,9 +128,26 @@ async function getAccountBalance(address) {
   return parseInt(balance, 16)
 }
 
+async function sendRawSignedTransaction(rawSignedTx) {
+  const { data } = await axios.post('http://parity1:8545', {
+    jsonrpc: '2.0',
+    method: 'eth_sendRawTransaction',
+    params: [rawSignedTx],
+    id: 1,
+  })
+
+  if (data.error) {
+    throw Error(data.error.message)
+  }
+
+  return data.result
+}
+
 module.exports = {
   getNodeStatus,
-  transferFundsToAccount,
   getTransactionByHash,
   getAccountBalance,
+  getNextNonce,
+  transferFundsToAccount,
+  sendRawSignedTransaction
 }

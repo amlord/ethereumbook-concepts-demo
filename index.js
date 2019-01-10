@@ -18,6 +18,8 @@ const { getParityNetworkStatus } = require('./src/advanced/getParityNetworkStatu
 const { transferFunds } = require('./src/advanced/transferFunds')
 const { getTransaction } = require('./src/advanced/getTransaction')
 const { getAccountBalance } = require('./src/advanced/getAccountBalance')
+const { createRawSignedTransaction } = require('./src/advanced/createRawSignedTransaction')
+const { sendRawTransaction } = require('./src/advanced/sendRawTransaction')
 
 // exit
 const quit = require('./src/quit')
@@ -31,6 +33,7 @@ async function execute() {
   }
 
   const actions = [ 
+    new inquirer.Separator(style.note('────────────────────────────\n  Basic Functionality')),
     {
       name: 'Generate CSPRN (cryptographically secure pseudo-random number)',
       short: 'Generate CSPRN',
@@ -71,14 +74,14 @@ async function execute() {
       short: 'HD Wallet Accounts',
       value: 'deriveHdWalletAccounts'
     },
-    new inquirer.Separator(),
+    new inquirer.Separator(style.note('────────────────────────────\n  Advanced Functionality (Parity Node Required)')),
     {
       name: 'Get Parity Network Status',
       short: 'Network Status',
       value: 'getParityNetworkStatus'
     },
     {
-      name: 'Transfer Funds to Account',
+      name: 'Transfer Funds (from admin account)',
       short: 'Transfer Funds',
       value: 'transferFunds'
     },
@@ -92,13 +95,22 @@ async function execute() {
       short: 'Account Balance',
       value: 'getAccountBalance'
     },
-    new inquirer.Separator(),
+    {
+      name: 'Create Raw Signed Transaction (transfer of funds)',
+      short: 'Create Raw Transaction',
+      value: 'createRawSignedTransaction'
+    },
+    {
+      name: 'Send Raw Transaction to Network',
+      short: 'Send Raw Transaction',
+      value: 'sendRawTransaction'
+    },
+    new inquirer.Separator(style.note('────────────────────────────')),
     {
       name: 'Quit',
       short: 'Quit',
       value: 'quit'
-    },
-    new inquirer.Separator()
+    }
   ]
 
   while (true) {
@@ -162,7 +174,15 @@ async function execute() {
       case 'getAccountBalance':
         await getAccountBalance()
         break
-      
+
+      case 'createRawSignedTransaction':
+        await createRawSignedTransaction()
+        break
+
+      case 'sendRawTransaction':
+        await sendRawTransaction()
+        break
+        
       // quit CLI
       
       case 'quit':

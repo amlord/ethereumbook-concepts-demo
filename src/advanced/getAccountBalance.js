@@ -9,7 +9,7 @@ async function getAccountBalance() {
       type: 'input',
       name: 'account',
       message: 'Account Address',
-      default: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+      default: '0xbf83a47dfb126fb831e1f9c3e91c5857f4a56661',
     },
   ])
 
