@@ -12,7 +12,7 @@ yarn run parity:start
 ```bash
 yarn run parity:monitor
 ```
-
+Once running, the dashboard can be found here: [http://localhost:3001/](http://localhost:3001)
 ## Configuring A Node
 
 To add another node to the Parity cluster, follow these steps: [Parity Node Configuration](parity-configuration.md).
