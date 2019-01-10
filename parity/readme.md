@@ -15,7 +15,7 @@ yarn run parity:monitor
 
 ## Configuring A Node
 
-To add another node to the Parity cluster, follow these steps: [Parity Node Configuration](./parity-configuration.md).
+To add another node to the Parity cluster, follow these steps: [Parity Node Configuration](parity-configuration.md).
 
 ### Talking to a Node
 
