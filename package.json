@@ -2,6 +2,20 @@
   "name": "ethereumbook-concepts-demo",
   "version": "1.0.0",
   "description": "A CLI for demonstration of concepts in the \"Mastering Ethereum\" book by Andreas M. Antonopoulos",
+  "keywords": [
+    "ethereum",
+    "cli",
+    "parity",
+    "blockchain",
+    "mnemonic",
+    "checksum",
+    "hierarchical",
+    "deterministic",
+    "wallet",
+    "eip55",
+    "bip39",
+    "bip44"
+  ],
   "main": "index.js",
   "scripts": {
     "start": "node .",
