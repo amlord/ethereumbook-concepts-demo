@@ -45,6 +45,10 @@ services:
     image: buythewhale/ethstats_monitor
     volumes:
     - ./parity/monitor/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
+    depends_on:
+      - parity1
+      - parity2
+      - parity3
 
   dashboard:
     container_name: dashboard
@@ -53,3 +57,5 @@ services:
     - ./parity/dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
     ports:
     - 3001:3000
+    depends_on:
+      - monitor
