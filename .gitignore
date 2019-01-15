@@ -67,3 +67,6 @@ backlog.todo
 parity/nodes/**/cache/
 parity/nodes/**/chains/
 parity/nodes/**/jsonrpc.ipc
+
+# solidity
+contracts/solidity/build
