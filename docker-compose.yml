@@ -44,7 +44,7 @@ services:
     container_name: monitor
     image: buythewhale/ethstats_monitor
     volumes:
-    - ./parity/monitor/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
+      - ./parity/monitor/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
     depends_on:
       - parity1
       - parity2
@@ -54,8 +54,14 @@ services:
     container_name: dashboard
     image: buythewhale/ethstats
     volumes:
-    - ./parity/dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
+      - ./parity/dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
     ports:
-    - 3001:3000
+      - 3001:3000
     depends_on:
       - monitor
+
+  solidity:
+    container_name: solidity
+    image: ethereum/solc:stable
+    volumes:
+      - ./contracts/solidity:/contracts/

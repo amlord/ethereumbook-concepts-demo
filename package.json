@@ -23,6 +23,7 @@
     "test": "jest",
     "parity:start": "docker-compose up parity1 parity2 parity3",
     "parity:monitor": "docker-compose up monitor dashboard",
+    "solidity:compile": "./scripts/solidity-compile-all.sh",
     "lint": "prettier --config ./.prettierrc --write \"./src/**/*.js\""
   },
   "repository": "https://github.com/amlord/ethereumbook-concepts-demo.git",
