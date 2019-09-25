@@ -22,7 +22,7 @@ function getNextNonceFromPrivateKey(privateKey) {
   return parity.getNextNonce(`0x${address}`)
 }
 
-async function createRawSignedTransaction() {
+async function createRawSignedFundsTransfer() {
   // prompt user for private key of signing account
   const { privateKey } = await inquirer.prompt([
     {
@@ -83,6 +83,66 @@ async function createRawSignedTransaction() {
   console.log(`> Raw Signed Transaction:\n\n${style.primary(rawSignedTx)}`)
 }
 
+async function createRawSignedContractDeployment() {
+  // prompt user for private key of signing account
+  const { privateKey } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'privateKey',
+      message: 'Private Key of Signing Account',
+      default: '6d2591af15523fd28d513ff017e8e4e0d7c8ed612bb8708b703bfc7de415ecfa',
+    },
+  ])
+
+  // prompt user for compiled contract data
+  const { data } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'data',
+      message: 'Contract compiled data'
+    },
+  ])
+
+  // prompt user for address of receiving account
+  const { value } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'value',
+      message: 'Transfer Amount',
+      default: '0',
+    },
+  ])
+
+  const nonce = await getNextNonceFromPrivateKey(privateKey)
+
+  const txData = {
+    nonce: nonce || '0x0',
+    gasPrice: '0x09184e72a000',
+    gasLimit: '0x30000',
+    value: `0x${parseInt(value).toString(16)}`, // initial funds to send to contract
+    data,
+    v: chainId, // local Parity cluster chain id
+    r: 0,
+    s: 0 
+  }
+
+  const tx = new ethTx(txData)
+
+  // sign the transaction
+  tx.sign(Buffer.from(privateKey, 'hex'))
+
+  // serialise the
+  const serializedTx = tx.serialize()
+  const rawSignedTx = `0x${serializedTx.toString('hex')}`
+
+  console.log('\n')
+  console.log(`> Transaction Data:\n\n`)
+  console.log(txData)
+  console.log('\n')
+  console.log(`> Raw Signed Transaction:\n\n${style.primary(rawSignedTx)}`)
+}
+
 module.exports = {
-  createRawSignedTransaction,
+  createRawSignedFundsTransfer,
+  createRawSignedContractDeployment
 }

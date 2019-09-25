@@ -2,6 +2,7 @@ const inquirer = require('inquirer')
 const style = require('./helpers/textStyle')
 const { deriveEthereumAddress } = require('./deriveEthereumAddress')
 const { createChecksumFromAddress } = require('./eip55Checksum')
+const { deriveDeterministicWalletSeed } = require('./generateMnemonic')
 
 // eliptic curve package for Ethereum (& Bitcoin)
 const secp256k1 = require('secp256k1')
@@ -53,6 +54,7 @@ function deriveHdWalletAccounts(seed, account = 0, child = 0, results = 1) {
       address: createChecksumFromAddress(address),
       privateKey: childkey.privateKey.toString('hex'),
       publicKey: childkey.publicKey.toString('hex'),
+      publicKeyUncompressed: uncompressedPublicKeyBuffer.toString('hex'),
     })
   }
 
@@ -60,15 +62,43 @@ function deriveHdWalletAccounts(seed, account = 0, child = 0, results = 1) {
 }
 
 async function deriveAndDisplayHdWalletAccounts() {
-  // prompt user to enter BIP-39 seed
-  const { seed } = await inquirer.prompt([
+  let seed
+
+  // prompt user to enter BIP-39 mnemonic phrase
+  const { mnemonic } = await inquirer.prompt([
     {
       type: 'input',
-      name: 'seed',
-      message: 'BIP39 Seed',
-      default: 'a33aa0a477d9299fe9cb88e82b3e5b6e37d45a9ae0d133851516984212e4e5533137af755fe9e60e5e9cd1aa5a960ddbdd9690086cc00466c448a93169c9a65f',
+      name: 'mnemonic',
+      message: 'BIP39 Mnemonic phrase',
+      default: 'toddler ribbon enrich length output session begin scare foot dirt payment frequent',
     },
   ])
+
+  if(!mnemonic) {
+    // prompt user to enter BIP-39 seed
+    ({ seed } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'seed',
+        message: 'BIP39 Seed',
+        default: 'a33aa0a477d9299fe9cb88e82b3e5b6e37d45a9ae0d133851516984212e4e5533137af755fe9e60e5e9cd1aa5a960ddbdd9690086cc00466c448a93169c9a65f',
+      },
+    ]))
+  }
+
+  if(mnemonic && !seed) {
+    // prompt use to enter derived wallet passphrase
+    const { passphrase } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'passphrase',
+        message: 'Derived Wallet Passphrase (optional)',
+        default: '',
+      },
+    ])
+
+    seed = deriveDeterministicWalletSeed(mnemonic, passphrase)
+  }
 
   // prompt user to enter account id number
   const { account } = await inquirer.prompt([
@@ -110,6 +140,7 @@ async function deriveAndDisplayHdWalletAccounts() {
       Address: account.address,
       'Private Key': account.privateKey,
       'Public Key': account.publicKey,
+      // 'Public Key (uncompressed)': account.publicKeyUncompressed,
     }
   })
 

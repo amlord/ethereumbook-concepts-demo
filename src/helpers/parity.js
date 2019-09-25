@@ -1,4 +1,5 @@
 const axios = require('axios')
+const createKeccakHash = require('keccak')
 
 function formatClientVersion(rawClientVersion) {
   const regex = /v[0-9]+.[0-9]+.[0-9]+/g
@@ -110,6 +111,7 @@ async function getTransactionByHash(transactionHash) {
     blockHash: transaction.blockHash,
     blockNumber: parseInt(transaction.blockNumber, 16),
     from: transaction.from,
+    creates: transaction.creates || '',
     nonce: parseInt(transaction.nonce, 16),
     value: parseInt(transaction.value, 16),
   }
@@ -143,11 +145,35 @@ async function sendRawSignedTransaction(rawSignedTx) {
   return data.result
 }
 
+async function callContractMethod() {
+  const methodId = createKeccakHash('keccak256').update('withdraw(uint)').digest('hex').substring(0,8)
+  const withdrawAmount = '0000000000000000000000000000000000000000000000000000000100000000'
+  const callData = `0x${methodId}${withdrawAmount}`
+  console.log({callData})
+
+  const { data } = await axios.post('http://parity1:8545', {
+    jsonrpc: '2.0',
+    method: 'eth_call',
+    params: [{
+      to: '0x0250c1fcddd42eb2cea70b394d8a45d6620c011f',
+      data: callData
+    }],
+    id: 1,
+  })
+
+  if (data.error) {
+    throw Error(data.error.message)
+  }
+
+  return data.result
+}
+
 module.exports = {
   getNodeStatus,
   getTransactionByHash,
   getAccountBalance,
   getNextNonce,
   transferFundsToAccount,
-  sendRawSignedTransaction
+  sendRawSignedTransaction,
+  callContractMethod
 }

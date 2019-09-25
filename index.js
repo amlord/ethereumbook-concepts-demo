@@ -18,8 +18,9 @@ const { getParityNetworkStatus } = require('./src/advanced/getParityNetworkStatu
 const { transferFunds } = require('./src/advanced/transferFunds')
 const { getTransaction } = require('./src/advanced/getTransaction')
 const { getAccountBalance } = require('./src/advanced/getAccountBalance')
-const { createRawSignedTransaction } = require('./src/advanced/createRawSignedTransaction')
+const { createRawSignedFundsTransfer, createRawSignedContractDeployment } = require('./src/advanced/createRawSignedTransaction')
 const { sendRawTransaction } = require('./src/advanced/sendRawTransaction')
+const { callContractMethod } = require('./src/advanced/callContractMethod')
 
 // exit
 const quit = require('./src/quit')
@@ -95,11 +96,23 @@ async function execute() {
       short: 'Account Balance',
       value: 'getAccountBalance'
     },
+    new inquirer.Separator(style.note('────────────────────────────\n  Create Transaction')),
     {
-      name: 'Create Raw Signed Transaction (transfer of funds)',
+      name: 'Transfer of Funds (Raw Signed)',
       short: 'Create Raw Transaction',
-      value: 'createRawSignedTransaction'
+      value: 'createRawSignedFundsTransfer'
     },
+    {
+      name: 'Contract Deployment (Raw Signed)',
+      short: 'Create Raw Transaction',
+      value: 'createRawSignedContractDeployment'
+    },
+    {
+      name: 'Call Contract Method',
+      short: 'Call Contract Method',
+      value: 'callContractMethod'
+    },
+    new inquirer.Separator(style.note('────────────────────────────\n  Transmit Transaction')),
     {
       name: 'Send Raw Transaction to Network',
       short: 'Send Raw Transaction',
@@ -175,12 +188,20 @@ async function execute() {
         await getAccountBalance()
         break
 
-      case 'createRawSignedTransaction':
-        await createRawSignedTransaction()
+      case 'createRawSignedFundsTransfer':
+        await createRawSignedFundsTransfer()
         break
 
       case 'sendRawTransaction':
         await sendRawTransaction()
+        break
+
+      case 'createRawSignedContractDeployment':
+        await createRawSignedContractDeployment()
+        break
+
+      case 'callContractMethod':
+        await callContractMethod()
         break
         
       // quit CLI
