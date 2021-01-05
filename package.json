@@ -33,7 +33,7 @@
     "prettier": "1.15.3"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bignumber.js": "^8.0.1",
     "chalk": "^2.4.1",
     "crypto": "^1.0.1",
